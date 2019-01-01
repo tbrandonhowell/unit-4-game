@@ -15,13 +15,24 @@ function logIt() {
     console.log("losses = " + losses);
 }
 
+function uniqueRand(range,floor) { // this will set a random number, but if the random number already exists in the array, it will continue to pick a new random number until it is unique. In theory this could create an infinite loop but statistically its quite unlikely
+    var r = Math.floor(Math.random() * range) + floor;
+    console.log("random number selected");
+    while(crystal.indexOf(r) > -1) {
+        var r = Math.floor(Math.random() * range) + floor;
+        console.log("random number selected");
+    }
+    return r;
+}
+
 function resetIt() { // resets for the next round
     goal = Math.floor(Math.random() * 101) + 19; // set random value for game target from 19-120
     gameTotal = 0; // reset the game total
-    crystal[0] = Math.floor(Math.random() * 12) + 1; // set random value for crystal0 from 1-12
-    crystal[1] = Math.floor(Math.random() * 12) + 1; // set random value for crystal1 from 1-12
-    crystal[2] = Math.floor(Math.random() * 12) + 1; // set random value for crystal2 from 1-12
-    crystal[3] = Math.floor(Math.random() * 12) + 1; // set random value for crystal3 from 1-12
+    // could to a loop for these, but there's only four in this game:
+    crystal[0] = uniqueRand(12,1);
+    crystal[1] = uniqueRand(12,1);
+    crystal[2] = uniqueRand(12,1);
+    crystal[3] = uniqueRand(12,1);
     $("#goal").html(goal); // write the goal to the DOM
     $("#score").html(gameTotal); // write the gameTotal to the DOM
 }
